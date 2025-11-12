@@ -66,14 +66,22 @@ public class Zoo {
         System.out.println("Name: " + name + ", City: " + city + ", N° Cages: " + NUMBER_OF_CAGES + " N° animals: " + nbrAnimals);
     }
 
-    public boolean addAnimal(Animal animal) {
-        if (searchAnimal(animal) != -1)
-            return false;
-        if (isZooFull())
-            return false;
-        animals[nbrAnimals] = animal;
-        nbrAnimals++;
-        return true;
+
+    public void addAnimal(Animal animal) throws ZooFullException, InvalidAgeException {
+        if (isZooFull()) {
+            throw new ZooFullException("Le zoo est plein !");
+        }
+
+        if (animal.getAge() < 0) {
+            throw new InvalidAgeException("Âge d’animal invalide : l’âge ne peut pas être négatif.");
+        }
+
+        for (int i = 0; i < animals.length; i++) {
+            if (animals[i] == null) {
+                animals[i] = animal;
+                break;
+            }
+        }
     }
 
     public boolean removeAnimal(Animal animal) {
