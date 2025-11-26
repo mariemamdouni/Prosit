@@ -7,7 +7,7 @@ public class Employe implements Comparable<Employe> {
     private String nomDepartement;
     private int grade;
 
-    public Employe() {}
+    public Employe(int i, String ali) {}
 
     public Employe(int id, String nom, String prenom, String nomDepartement, int grade) {
         this.id = id;
@@ -54,6 +54,7 @@ public class Employe implements Comparable<Employe> {
 
     @Override
     public int compareTo(Employe e) {
-        return Integer.compare(this.id, e.id);
+        return this.id - e.id;
     }
+
 }

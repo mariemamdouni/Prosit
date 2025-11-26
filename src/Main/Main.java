@@ -1,38 +1,40 @@
 package Main;
 
-import Entities.*;
-import java.util.*;
+import Entities.AffectationHashMap;
+import Entities.Departement;
+import Entities.Employe;
 
 public class Main {
     public static void main(String[] args) {
-        SocieteArrayList societe = new SocieteArrayList();
 
-        Employe e1 = new Employe(1, "Amira", "Zouari", "IT", 3);
-        Employe e2 = new Employe(2, "Sami", "Trabelsi", "RH", 2);
-        Employe e3 = new Employe(3, "Karim", "Mansour", "IT", 1);
-        Employe e4 = new Employe(4, "Nour", "Ben Ali", "Finance", 4);
+        Employe e1 = new Employe(2, "Ali");
+        Employe e2 = new Employe(1, "Mouna");
+        Employe e3 = new Employe(3, "Nidhal");
 
-        societe.ajouterEmploye(e1);
-        societe.ajouterEmploye(e2);
-        societe.ajouterEmploye(e3);
-        societe.ajouterEmploye(e4);
+        Departement d1 = new Departement(10, "IT", 30);
+        Departement d2 = new Departement(20, "Finance", 15);
 
-        System.out.println("Liste des employés");
-        societe.displayEmploye();
+        AffectationHashMap gestion = new AffectationHashMap();
 
-        System.out.println("recherche 'Amira' : " + societe.rechercherEmploye("Amira"));
-        System.out.println("recherche e2 : " + societe.rechercherEmploye(e2));
+        gestion.ajouterEmployeDepartement(e1, d1);
+        gestion.ajouterEmployeDepartement(e2, d2);
+        gestion.ajouterEmployeDepartement(e3, d1);
 
-        societe.supprimerEmploye(e3);
-        System.out.println("Après suppression de Karim :");
-        societe.displayEmploye();
+        gestion.ajouterEmployeDepartement(e1, d2);
 
-        societe.trierEmployeParId();
-        System.out.println("Tri par ID");
-        societe.displayEmploye();
+        gestion.afficherEmployesEtDepartements();
 
-        societe.trierEmployeParNomDepartementEtGrade();
-        System.out.println("Tri par Département/Grade/Nom ");
-        societe.displayEmploye();
+        System.out.println("suppression");
+        gestion.supprimerEmployeEtDepartement(e1, d1);
+        gestion.afficherEmployesEtDepartements();
+
+        System.out.println("employés");
+        gestion.afficherEmployes();
+
+        System.out.println("départements");
+        gestion.afficherDepartements();
+
+        System.out.println("trie par id");
+        System.out.println(gestion.trierMap());
     }
 }
